@@ -158,7 +158,7 @@ def train_classifier():
                  " -w "+image_width_variable.get()+" -h "+image_height_variable.get()+" -mode "+mode_variable.get()+" -numThreads "+num_threads_variable.get()+
                  " -precalcValBufSize "+val_buf_size_variable.get()+" -precalcIdxBufSize "+index_buf_size_variable.get()+
                  " -acceptanceRatioBreakValue "+acceptance_ratio_break_variable.get()+" -minHitRate "+min_hit_rate_variable.get()+
-                 " -maxFalseAlarmRate "+max_false_alarm_rate_variable.get()+" -bt "+boost_type_variable.get()).split(' '))
+                 " -maxFalseAlarmRate "+max_false_alarm_rate_variable.get()+" -bt "+boost_type_variable.get()+" -featureType "+feature_type_variable.get()).split(' '))
     except:
         sys.exit("ERROR: Couldnt train network for some unknown error!")
     pos_index.close()
@@ -263,6 +263,12 @@ max_false_alarm_rate_variable.set('0.50')
 max_false_alarm_rate_enter = tk.Spinbox(main_window, from_=0, to=1, increment=0.01, textvariable=max_false_alarm_rate_variable).grid(column=1,row=13, sticky="ew")
 
 # More options here
+
+feature_type_label = tk.Label(main_window, text="Which boost classifier to use", pady=3).grid(column=0,row=17, sticky="ew")
+feature_type_options = ["HAAR", "LBP"]
+feature_type_variable = tk.StringVar()
+feature_type_variable.set(feature_type_options[0])
+feature_type_enter = tk.OptionMenu(main_window, feature_type_variable, *feature_type_options).grid(column=1,row=17, sticky="ew")
 
 boost_type_label = tk.Label(main_window, text="Which boost classifier to use", pady=3).grid(column=0,row=18, sticky="ew")
 boost_type_options = ["DAB", "RAB", "LB", "GAB"]

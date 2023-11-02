@@ -153,7 +153,9 @@ def train_classifier():
     except:
         sys.exit("ERROR: Couldn't maike classifier directory at "+output_entry_variable.get()+" | Possible error in execution on ./dir_gen.sh")
     try:
-        sp.call(("opencv_traincascade -data "+output_entry_variable.get()+"/classifier -vec "+output_entry_variable.get()+"/positive.vec -bg "+negative_entry_variable.get()+"/index.txt -numPos "+total_pos+" -numNeg "+total_neg+" -numStages "+num_stage_variable.get()+" -w "+image_width_variable.get()+" -h "+image_height_variable.get()).split(' '))
+        sp.call(("opencv_traincascade -data "+output_entry_variable.get()+"/classifier -vec "+output_entry_variable.get()+"/positive.vec -bg "+
+                 negative_entry_variable.get()+"/index.txt -numPos "+total_pos+" -numNeg "+total_neg+" -numStages "+num_stage_variable.get()+
+                 " -w "+image_width_variable.get()+" -h "+image_height_variable.get()+" -mode "+mode_variable.get()).split(' '))
     except:
         sys.exit("ERROR: Couldnt train network for some unknown error!")
     pos_index.close()
@@ -222,10 +224,16 @@ sample_usage_percent_variable = tk.StringVar()
 sample_usage_percent_variable.set('100')
 sample_usage_percent_entry = tk.Spinbox(main_window, from_=0, to=100, textvariable=sample_usage_percent_variable).grid(column=1, row=6, sticky="ew")
 
-num_satge_label = tk.Label(main_window, text="Number of training stages", pady=3).grid(column=0,row=7, sticky="ew")
+num_stage_label = tk.Label(main_window, text="Number of training stages", pady=3).grid(column=0,row=7, sticky="ew")
 num_stage_variable = tk.StringVar()
 num_stage_variable.set('10')
 num_stage_enter = tk.Spinbox(main_window, textvariable=num_stage_variable).grid(column=1,row=7, sticky="ew")
+
+mode_label = tk.Label(main_window, text="Which mode to use:", pady=3).grid(column=0,row=7, sticky="ew")
+mode_options = ["BASIC", "CORE", "ALL"]
+mode_variable = tk.StringVar()
+mode_variable.set(mode_options[0])
+mode_enter = tk.OptionMenu(main_window, mode_variable, *mode_options).grid(column=1,row=7, sticky="ew")
 
 start_btn_text = tk.StringVar()
 start_btn_text.set("Start")

@@ -155,7 +155,7 @@ def train_classifier():
     try:
         sp.call(("opencv_traincascade -data "+output_entry_variable.get()+"/classifier -vec "+output_entry_variable.get()+"/positive.vec -bg "+
                  negative_entry_variable.get()+"/index.txt -numPos "+total_pos+" -numNeg "+total_neg+" -numStages "+num_stage_variable.get()+
-                 " -w "+image_width_variable.get()+" -h "+image_height_variable.get()+" -mode "+mode_variable.get()).split(' '))
+                 " -w "+image_width_variable.get()+" -h "+image_height_variable.get()+" -mode "+mode_variable.get()+" -numThreads "+num_threads_variable.get()).split(' '))
     except:
         sys.exit("ERROR: Couldnt train network for some unknown error!")
     pos_index.close()
@@ -212,12 +212,12 @@ output_entry_btn = tk.Button(text="...", height = 1, width=5, command = open_out
 image_width_label = tk.Label(main_window, text="Sample Image: WIDTH", pady=3).grid(column=0, row=4, sticky="ew")
 image_width_variable = tk.StringVar()
 image_width_variable.set('24')
-image_width_entry = tk.Spinbox(main_window, textvariable=image_width_variable).grid(column=1, row=4, sticky="ew")
+image_width_entry = tk.Spinbox(main_window, from_=5, to=50, textvariable=image_width_variable).grid(column=1, row=4, sticky="ew")
 
 image_height_label = tk.Label(main_window, text="Sample Image: HEIGHT", pady=3).grid(column=0, row=5, sticky="ew")
 image_height_variable = tk.StringVar()
 image_height_variable.set('24')
-image_height_entry = tk.Spinbox(main_window, textvariable=image_height_variable).grid(column=1, row=5, sticky="ew")
+image_height_entry = tk.Spinbox(main_window, from_=5, to=50, textvariable=image_height_variable).grid(column=1, row=5, sticky="ew")
 
 sample_usage_percent_label = tk.Label(main_window, text="Sample image usage percent(%)", pady=3).grid(column=0,row=6, sticky="ew")
 sample_usage_percent_variable = tk.StringVar()
@@ -226,19 +226,24 @@ sample_usage_percent_entry = tk.Spinbox(main_window, from_=0, to=100, textvariab
 
 num_stage_label = tk.Label(main_window, text="Number of training stages", pady=3).grid(column=0,row=7, sticky="ew")
 num_stage_variable = tk.StringVar()
-num_stage_variable.set('10')
-num_stage_enter = tk.Spinbox(main_window, textvariable=num_stage_variable).grid(column=1,row=7, sticky="ew")
+num_stage_variable.set('20')
+num_stage_enter = tk.Spinbox(main_window, from_=1, to=30, textvariable=num_stage_variable).grid(column=1,row=7, sticky="ew")
 
-mode_label = tk.Label(main_window, text="Which mode to use:", pady=3).grid(column=0,row=7, sticky="ew")
+mode_label = tk.Label(main_window, text="Which mode to use:", pady=3).grid(column=0,row=8, sticky="ew")
 mode_options = ["BASIC", "CORE", "ALL"]
 mode_variable = tk.StringVar()
 mode_variable.set(mode_options[0])
-mode_enter = tk.OptionMenu(main_window, mode_variable, *mode_options).grid(column=1,row=7, sticky="ew")
+mode_enter = tk.OptionMenu(main_window, mode_variable, *mode_options).grid(column=1,row=8, sticky="ew")
+
+num_threads_label = tk.Label(main_window, text="Number of threads to use", pady=3).grid(column=0,row=9, sticky="ew")
+num_threads_variable = tk.StringVar()
+num_threads_variable.set('5')
+num_threads_enter = tk.Spinbox(main_window, from_=1, to=10, textvariable=num_threads_variable).grid(column=1,row=9, sticky="ew")
 
 start_btn_text = tk.StringVar()
 start_btn_text.set("Start")
-start_btn = tk.Button(main_window,textvariable=start_btn_text, fg = "#000000", bg = "#00FF55", height = 2, width = 20, command = start_training).grid(column=0,row=8,columnspan=3,sticky="ew")
+start_btn = tk.Button(main_window,textvariable=start_btn_text, fg = "#000000", bg = "#00FF55", height = 2, width = 20, command = start_training).grid(column=0,row=11,columnspan=3,sticky="ew")
 
-developer_label = tk.Label(main_window, bg="#000000", fg="#ffffff", text="Developed by github.com/amannirala13").grid(column = 0, row=9, columnspan = 3, sticky="ew")
+# developer_label = tk.Label(main_window, bg="#000000", fg="#ffffff", text="Developed by github.com/amannirala13").grid(column = 0, row=10, columnspan = 3, sticky="ew")
 
 main_window.mainloop()

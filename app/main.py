@@ -156,7 +156,8 @@ def train_classifier():
         sp.call(("opencv_traincascade -data "+output_entry_variable.get()+"/classifier -vec "+output_entry_variable.get()+"/positive.vec -bg "+
                  negative_entry_variable.get()+"/index.txt -numPos "+total_pos+" -numNeg "+total_neg+" -numStages "+num_stage_variable.get()+
                  " -w "+image_width_variable.get()+" -h "+image_height_variable.get()+" -mode "+mode_variable.get()+" -numThreads "+num_threads_variable.get()+
-                 " -precalcValBufSize "+val_buf_size_variable.get()+" -precalcIdxBufSize "+index_buf_size_variable.get()).split(' '))
+                 " -precalcValBufSize "+val_buf_size_variable.get()+" -precalcIdxBufSize "+index_buf_size_variable.get()+
+                 " -acceptanceRatioBreakValue "+acceptance_ratio_break_variable.get()).split(' '))
     except:
         sys.exit("ERROR: Couldnt train network for some unknown error!")
     pos_index.close()
@@ -245,6 +246,10 @@ index_buf_size_variable = tk.StringVar()
 index_buf_size_variable.set('1024')
 index_buf_size_enter = tk.Spinbox(main_window, from_=1, to=100000, textvariable=index_buf_size_variable).grid(column=1,row=10, sticky="ew")
 
+acceptance_ratio_break_label = tk.Label(main_window, text="Acceptance ratio break value", pady=3).grid(column=0,row=11, sticky="ew")
+acceptance_ratio_break_variable = tk.StringVar()
+acceptance_ratio_break_variable.set('-1')
+acceptance_ratio_break_enter = tk.Spinbox(main_window, textvariable=acceptance_ratio_break_variable).grid(column=1,row=11, sticky="ew")
 
 
 

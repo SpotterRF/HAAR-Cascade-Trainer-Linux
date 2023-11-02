@@ -155,7 +155,8 @@ def train_classifier():
     try:
         sp.call(("opencv_traincascade -data "+output_entry_variable.get()+"/classifier -vec "+output_entry_variable.get()+"/positive.vec -bg "+
                  negative_entry_variable.get()+"/index.txt -numPos "+total_pos+" -numNeg "+total_neg+" -numStages "+num_stage_variable.get()+
-                 " -w "+image_width_variable.get()+" -h "+image_height_variable.get()+" -mode "+mode_variable.get()+" -numThreads "+num_threads_variable.get()).split(' '))
+                 " -w "+image_width_variable.get()+" -h "+image_height_variable.get()+" -mode "+mode_variable.get()+" -numThreads "+num_threads_variable.get()+
+                 " -precalcValBufSize "+val_buf_size_variable.get()+" -precalcIdxBufSize "+index_buf_size_variable.get()).split(' '))
     except:
         sys.exit("ERROR: Couldnt train network for some unknown error!")
     pos_index.close()
@@ -229,20 +230,33 @@ num_stage_variable = tk.StringVar()
 num_stage_variable.set('20')
 num_stage_enter = tk.Spinbox(main_window, from_=1, to=30, textvariable=num_stage_variable).grid(column=1,row=7, sticky="ew")
 
-mode_label = tk.Label(main_window, text="Which mode to use:", pady=3).grid(column=0,row=8, sticky="ew")
+num_threads_label = tk.Label(main_window, text="Number of threads to use", pady=3).grid(column=0,row=8, sticky="ew")
+num_threads_variable = tk.StringVar()
+num_threads_variable.set('5')
+num_threads_enter = tk.Spinbox(main_window, from_=1, to=10, textvariable=num_threads_variable).grid(column=1,row=8, sticky="ew")
+
+val_buf_size_label = tk.Label(main_window, text="Precalculated feature value buffer size (MB)", pady=3).grid(column=0,row=9, sticky="ew")
+val_buf_size_variable = tk.StringVar()
+val_buf_size_variable.set('1024')
+val_buf_size_enter = tk.Spinbox(main_window, from_=1, to=100000, textvariable=val_buf_size_variable).grid(column=1,row=9, sticky="ew")
+
+index_buf_size_label = tk.Label(main_window, text="Precalculated feature index buffer size (MB)", pady=3).grid(column=0,row=10, sticky="ew")
+index_buf_size_variable = tk.StringVar()
+index_buf_size_variable.set('1024')
+index_buf_size_enter = tk.Spinbox(main_window, from_=1, to=100000, textvariable=index_buf_size_variable).grid(column=1,row=10, sticky="ew")
+
+
+
+
+mode_label = tk.Label(main_window, text="Which mode to use", pady=3).grid(column=0,row=19, sticky="ew")
 mode_options = ["BASIC", "CORE", "ALL"]
 mode_variable = tk.StringVar()
 mode_variable.set(mode_options[0])
-mode_enter = tk.OptionMenu(main_window, mode_variable, *mode_options).grid(column=1,row=8, sticky="ew")
-
-num_threads_label = tk.Label(main_window, text="Number of threads to use", pady=3).grid(column=0,row=9, sticky="ew")
-num_threads_variable = tk.StringVar()
-num_threads_variable.set('5')
-num_threads_enter = tk.Spinbox(main_window, from_=1, to=10, textvariable=num_threads_variable).grid(column=1,row=9, sticky="ew")
+mode_enter = tk.OptionMenu(main_window, mode_variable, *mode_options).grid(column=1,row=19, sticky="ew")
 
 start_btn_text = tk.StringVar()
 start_btn_text.set("Start")
-start_btn = tk.Button(main_window,textvariable=start_btn_text, fg = "#000000", bg = "#00FF55", height = 2, width = 20, command = start_training).grid(column=0,row=11,columnspan=3,sticky="ew")
+start_btn = tk.Button(main_window,textvariable=start_btn_text, fg = "#000000", bg = "#00FF55", height = 2, width = 20, command = start_training).grid(column=0,row=20,columnspan=3,sticky="ew")
 
 # developer_label = tk.Label(main_window, bg="#000000", fg="#ffffff", text="Developed by github.com/amannirala13").grid(column = 0, row=10, columnspan = 3, sticky="ew")
 

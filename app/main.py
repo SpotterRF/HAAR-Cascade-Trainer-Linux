@@ -271,7 +271,7 @@ feature_type_variable.set(feature_type_options[0])
 feature_type_enter = tk.OptionMenu(main_window, feature_type_variable, *feature_type_options).grid(column=1,row=17, sticky="ew")
 
 boost_type_label = tk.Label(main_window, text="Which boost classifier to use", pady=3).grid(column=0,row=18, sticky="ew")
-boost_type_options = ["DAB", "RAB", "LB", "GAB"]
+boost_type_options = ["GAB", "RAB", "LB", "DAB"]
 boost_type_variable = tk.StringVar()
 boost_type_variable.set(boost_type_options[0])
 boost_type_enter = tk.OptionMenu(main_window, boost_type_variable, *boost_type_options).grid(column=1,row=18, sticky="ew")
@@ -279,7 +279,7 @@ boost_type_enter = tk.OptionMenu(main_window, boost_type_variable, *boost_type_o
 mode_label = tk.Label(main_window, text="Which mode to use", pady=3).grid(column=0,row=19, sticky="ew")
 mode_options = ["BASIC", "CORE", "ALL"]
 mode_variable = tk.StringVar()
-mode_variable.set(mode_options[0])
+mode_variable.set(mode_options[2])
 mode_enter = tk.OptionMenu(main_window, mode_variable, *mode_options).grid(column=1,row=19, sticky="ew")
 
 start_btn_text = tk.StringVar()

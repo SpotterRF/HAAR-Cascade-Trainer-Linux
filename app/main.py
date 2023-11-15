@@ -296,17 +296,17 @@ num_stage_enter = tk.Spinbox(main_window, from_=1, to=30, textvariable=num_stage
 num_threads_label = tk.Label(main_window, text="Number of threads to use", pady=3).grid(column=0,row=8, sticky="ew")
 num_threads_variable = tk.StringVar()
 num_threads_variable.set('5')
-num_threads_enter = tk.Spinbox(main_window, from_=1, to=10, textvariable=num_threads_variable).grid(column=1,row=8, sticky="ew")
+num_threads_enter = tk.Spinbox(main_window, from_=1, to=100, textvariable=num_threads_variable).grid(column=1,row=8, sticky="ew")
 
 val_buf_size_label = tk.Label(main_window, text="Precalculated feature value buffer size (MB)", pady=3).grid(column=0,row=9, sticky="ew")
 val_buf_size_variable = tk.StringVar()
 val_buf_size_variable.set('1024')
-val_buf_size_enter = tk.Spinbox(main_window, from_=1, to=100000, textvariable=val_buf_size_variable).grid(column=1,row=9, sticky="ew")
+val_buf_size_enter = tk.Spinbox(main_window, from_=1, to=100000, increment=512, textvariable=val_buf_size_variable).grid(column=1,row=9, sticky="ew")
 
 index_buf_size_label = tk.Label(main_window, text="Precalculated feature index buffer size (MB)", pady=3).grid(column=0,row=10, sticky="ew")
 index_buf_size_variable = tk.StringVar()
 index_buf_size_variable.set('1024')
-index_buf_size_enter = tk.Spinbox(main_window, from_=1, to=100000, textvariable=index_buf_size_variable).grid(column=1,row=10, sticky="ew")
+index_buf_size_enter = tk.Spinbox(main_window, from_=1, to=100000, increment=512, textvariable=index_buf_size_variable).grid(column=1,row=10, sticky="ew")
 
 acceptance_ratio_break_label = tk.Label(main_window, text="Acceptance ratio break value", pady=3).grid(column=0,row=11, sticky="ew")
 acceptance_ratio_break_variable = tk.StringVar()

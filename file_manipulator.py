@@ -7,7 +7,7 @@ def read_files(input_dir):
 
 def write_files(input_dir, output_dir, files):
     for i, image in enumerate(files):
-        shutil.copy("{}/{}".format(input_dir, image), "{}pos020124-{}.png".format(output_dir, i))
+        shutil.copy("{}/{}".format(input_dir, image), "{}pos030124-{}.png".format(output_dir, i))
         # shutil.copy("{}/{}".format(input_dir, image), "{}neg281224-{}.png".format(output_dir, i))
 
 
